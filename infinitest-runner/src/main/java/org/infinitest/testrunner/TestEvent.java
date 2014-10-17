@@ -109,7 +109,7 @@ public class TestEvent implements Serializable {
 	}
 
 	private String getPointOfFailureClass() {
-		if (stackTrace.length == 0) // Temporary fix
+		if ((stackTrace == null) || (stackTrace.length == 0)) // Temporary fix
 		{
 			return fullErrorClassName;
 		}
@@ -117,7 +117,7 @@ public class TestEvent implements Serializable {
 	}
 
 	private int getPointOfFailureLineNumber() {
-		if (stackTrace.length == 0) // Temporary fix
+		if ((stackTrace == null) || (stackTrace.length == 0)) // Temporary fix
 		{
 			return 0;
 		}

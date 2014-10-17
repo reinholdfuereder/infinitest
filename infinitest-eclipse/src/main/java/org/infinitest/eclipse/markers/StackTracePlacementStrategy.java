@@ -42,10 +42,12 @@ public class StackTracePlacementStrategy implements MarkerPlacementStrategy {
 
 	@Override
 	public MarkerPlacement getPlacement(TestEvent event) {
-		for (StackTraceElement element : event.getStackTrace()) {
-			List<IResource> resources = lookup.findResourcesForClassName(element.getClassName());
-			if (!resources.isEmpty()) {
-				return new MarkerPlacement(resources.get(0), element.getLineNumber());
+		if (event.getStackTrace() != null) {
+			for (StackTraceElement element : event.getStackTrace()) {
+				List<IResource> resources = lookup.findResourcesForClassName(element.getClassName());
+				if (!resources.isEmpty()) {
+					return new MarkerPlacement(resources.get(0), element.getLineNumber());
+				}
 			}
 		}
 		return null;

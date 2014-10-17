@@ -46,6 +46,23 @@ public class TestNamePlacementStrategy implements MarkerPlacementStrategy {
 		if (resources.isEmpty()) {
 			return null;
 		}
-		return new MarkerPlacement(resources.get(0), 0);
+		int lineNumber = findLineNumberOfMethodDefinition(event.getTestName(), event.getTestMethod());
+		return new MarkerPlacement(resources.get(0), lineNumber);
 	}
+
+	private int findLineNumberOfMethodDefinition(String testName, String testMethod) {
+		int lineNumber = -1;
+		// TODO: e.g. use javassist (with correct classpath
+		// ClassPool classPool = new ClassPool();
+		// classPool.appendClassPath(cp);
+		// try {
+		// CtClass cc = classPool.get(testName);
+		// CtMethod methodX = cc.getDeclaredMethod(testMethod);
+		// lineNumber = methodX.getMethodInfo().getLineNumber(0);
+		// } catch (NotFoundException e) {
+		// // TODO: really swallow?
+		// }
+		return lineNumber >= 0 ? lineNumber : 1;
+	}
+
 }
