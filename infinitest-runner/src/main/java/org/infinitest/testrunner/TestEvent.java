@@ -61,6 +61,9 @@ public class TestEvent implements Serializable {
 
 		if (error != null) {
 			populateAttributesToEnsureSerializability(error);
+		} else {
+			stackTrace = new StackTraceElement[0];
+			System.out.println("stackTrace: " + stackTrace);
 		}
 	}
 
@@ -78,7 +81,7 @@ public class TestEvent implements Serializable {
 
 	private void populateAttributesToEnsureSerializability(Throwable error) {
 		isAssertionFailure = isTestFailure(error);
-		stackTrace = error.getStackTrace();
+		stackTrace = error.getStackTrace() != null ? error.getStackTrace() : new StackTraceElement[0];
 		simpleErrorClassName = error.getClass().getSimpleName();
 		fullErrorClassName = error.getClass().getName();
 	}
